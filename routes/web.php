@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SetlistCategoryController;
 use App\Http\Controllers\SetlistController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -25,7 +26,7 @@ Route::get('/', function () {
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
-});
+})->name('welcome');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
@@ -38,7 +39,12 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::controller(SetlistController::class)->group(function () {
-    Route::get('/setlist', 'index');
-});
+    Route::get('/setlist', 'index')->name('setlist');
+})->middleware(['auth', 'verified']);
+
+Route::controller(SetlistCategoryController::class)->group(function () {
+    Route::get('/setlist-categories', 'index')->name('setlist-categories');
+    Route::get('/setlist-categories/create', 'create')->name('setlist-categories.create');
+})->middleware(['auth', 'verified']);
 
 require __DIR__ . '/auth.php';

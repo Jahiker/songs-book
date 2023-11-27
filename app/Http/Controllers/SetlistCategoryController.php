@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreSetlistCategoryRequest;
 use App\Http\Requests\UpdateSetlistCategoryRequest;
 use App\Models\SetlistCategory;
+use Inertia\Inertia;
 
 class SetlistCategoryController extends Controller
 {
@@ -13,7 +14,13 @@ class SetlistCategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = SetlistCategory::latest()->paginate(10);
+        $title = 'Setlist Categories';
+
+        return Inertia::render('SetlistCategory/Index',[
+            'title' => $title,
+            'categories' => $categories
+        ]);
     }
 
     /**
@@ -21,7 +28,13 @@ class SetlistCategoryController extends Controller
      */
     public function create()
     {
-        //
+        $mustVerifyEmail = true;
+        $status = "success";
+
+        return Inertia::render('SetlistCategory/Create', [
+            'mustVerifyEmail' => $mustVerifyEmail,
+            'status' => $status,
+        ]);
     }
 
     /**
