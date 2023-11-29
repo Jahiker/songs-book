@@ -40,11 +40,12 @@ Route::middleware('auth')->group(function () {
 
 Route::controller(SetlistController::class)->group(function () {
     Route::get('/setlist', 'index')->name('setlist');
-})->middleware(['auth', 'verified']);
+})->middleware(['auth']);
 
 Route::controller(SetlistCategoryController::class)->group(function () {
     Route::get('/setlist-categories', 'index')->name('setlist-categories');
     Route::get('/setlist-categories/create', 'create')->name('setlist-categories.create');
-})->middleware(['auth', 'verified']);
+    Route::post('/setlist-categories/store', 'store')->name('setlist-categories.store');
+})->middleware(['auth']);
 
 require __DIR__ . '/auth.php';

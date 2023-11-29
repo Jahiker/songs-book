@@ -17,6 +17,7 @@ class SetlistCategory extends Model
      */
     protected $fillable = [
         'name',
+        'user_id'
     ];
 
     /**

@@ -14,10 +14,19 @@ class SetlistCategoryController extends Controller
      */
     public function index()
     {
-        $categories = SetlistCategory::latest()->paginate(10);
+        $categories = SetlistCategory::paginate(10)->through(function ($category) {
+            return [
+                'id' => $category->id,
+                'user_id' => $category->user_id,
+                'name' => $category->name,
+            ];
+        });
+
         $title = 'Setlist Categories';
 
-        return Inertia::render('SetlistCategory/Index',[
+        // dd($categories);
+
+        return Inertia::render('SetlistCategory/Index', [
             'title' => $title,
             'categories' => $categories
         ]);
@@ -28,11 +37,9 @@ class SetlistCategoryController extends Controller
      */
     public function create()
     {
-        $mustVerifyEmail = true;
         $status = "success";
 
         return Inertia::render('SetlistCategory/Create', [
-            'mustVerifyEmail' => $mustVerifyEmail,
             'status' => $status,
         ]);
     }
@@ -42,7 +49,11 @@ class SetlistCategoryController extends Controller
      */
     public function store(StoreSetlistCategoryRequest $request)
     {
-        //
+        $category = $request->validated();
+
+        SetlistCategory::create($category);
+
+        return to_route('setlist-categories');
     }
 
     /**

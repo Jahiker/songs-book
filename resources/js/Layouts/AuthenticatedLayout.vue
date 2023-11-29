@@ -35,7 +35,7 @@ const showingNavigationDropdown = ref(false);
                                 <NavLink :href="route('setlist')" :active="route().current('setlist')">
                                     Setlist
                                 </NavLink>
-                                <NavLink :href="route('setlist')" :active="route().current('setlist')">
+                                <NavLink :href="route('setlist-categories')" :active="route().current('setlist-categories')">
                                     Setlist Categories
                                 </NavLink>
                             </div>
