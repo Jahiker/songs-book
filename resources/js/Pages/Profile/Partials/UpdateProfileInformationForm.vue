@@ -12,6 +12,12 @@ defineProps({
     status: {
         type: String,
     },
+    edit: {
+        type: Boolean,
+    },
+    category: {
+        type: Object,
+    }
 });
 
 const user = usePage().props.auth.user;

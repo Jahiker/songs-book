@@ -46,6 +46,10 @@ Route::controller(SetlistCategoryController::class)->group(function () {
     Route::get('/setlist-categories', 'index')->name('setlist-categories');
     Route::get('/setlist-categories/create', 'create')->name('setlist-categories.create');
     Route::post('/setlist-categories/store', 'store')->name('setlist-categories.store');
+    Route::get('/setlist-categories/show', 'show')->name('setlist-categories.show');
+    Route::get('/setlist-categories/edit', 'edit')->name('setlist-categories.edit');
+    Route::put('/setlist-categories/update', 'update')->name('setlist-categories.update');
+    Route::post('/setlist-categories/destroy', 'destroy')->name('setlist-categories.destroy');
 })->middleware(['auth']);
 
 require __DIR__ . '/auth.php';

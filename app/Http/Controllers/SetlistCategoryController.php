@@ -61,7 +61,12 @@ class SetlistCategoryController extends Controller
      */
     public function show(SetlistCategory $setlistCategory)
     {
-        //
+        $edit = false;
+
+        return Inertia::render("SetlistCategory/Update", [
+            'edit' => $edit,
+            'category' => $setlistCategory
+        ]);
     }
 
     /**
@@ -69,7 +74,12 @@ class SetlistCategoryController extends Controller
      */
     public function edit(SetlistCategory $setlistCategory)
     {
-        //
+        $edit = true;
+
+        return Inertia::render("SetlistCategory/Update", [
+            'edit' => $edit,
+            'category' => $setlistCategory
+        ]);
     }
 
     /**
